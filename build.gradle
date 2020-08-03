@@ -1,0 +1,24 @@
+plugins {
+    id("maven-publish")
+		id "java"
+}
+
+publishing {
+	publications {
+			maven(MavenPublication) {
+					groupId = "com.mycompany.app"
+					version = "1.0-SNAPSHOT"
+					artifactId = "my-app"
+			}
+	}
+  repositories {
+      maven {
+          name = "simple-java-maven-app"
+          url = uri("https://maven.pkg.github.com/TheSledgeHammer/simple-java-maven-app")
+          credentials {
+              username = project.hasProperty('github_key') ? project.property('github_key') : System.getenv("github_user")
+              password = project.hasProperty('github_key') ? project.property('github_key') : System.getenv("github_key")
+          }
+      }
+  }
+}
